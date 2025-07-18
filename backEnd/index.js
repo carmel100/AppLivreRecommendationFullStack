@@ -37,10 +37,23 @@ const PORT = process.env.PORT || 3000;
 connexion();
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://applivrerecommendationfullstack.onrender.com'
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  credentials: true,
+  origin: function (origin, callback) {
+    // Accepte les requêtes sans origin (comme Postman) ou si l’origine est autorisée
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Not allowed by CORS: ${origin}`));
+    }
+  },
+  credentials: true
 }));
+
 app.use(express.json());
 
 app.use(session({
