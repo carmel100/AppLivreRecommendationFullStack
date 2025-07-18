@@ -11,10 +11,6 @@ lerna-debug.log*
 node_modules/
 frontEnd/react/node_modules/
 
-# Build outputs
-dist/
-dist-ssr/
-frontEnd/react/dist/
 
 # Local env files
 *.local
