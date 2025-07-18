@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-ps: 414px;
+    --breakpoint-bs: 1300px;
+    --breakpoint-ss: 1214px;
+   /* --breakpoint-ds: 1214px;*/
+    --breakpoint-ds: 1040px;
+    --breakpoint-rs: 900px;
+    --breakpoint-hs: 700px;
+    --breakpoint-ns: 600px;
+    --breakpoint-ls: 500px;
+    --breakpoint-vss: 415px;
+    --breakpoint-fs: 375px;
+    --breakpoint-qs: 340px;
+
+
+}
+
+@plugin 'tailwind-scrollbar'
+
