@@ -1,4 +1,3 @@
-// routeGithubProvider.js
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
@@ -22,7 +21,8 @@ routerGithub.get('/github/callback',
       nom: user.nom,
     }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    res.redirect(`http://localhost:5173/Accueil?token=${token}`);
+    const frontendURL = process.env.FRONTEND_URL || 'http://localhost:5173';
+    res.redirect(`${frontendURL}/Accueil?token=${token}`);
   }
 );
 
