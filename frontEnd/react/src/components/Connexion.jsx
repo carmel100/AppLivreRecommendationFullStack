@@ -18,6 +18,9 @@ import { MdNightlight } from "react-icons/md";
 
  import { ToastContainer, toast } from 'react-toastify';
 
+ import {  useLocation } from "react-router-dom";
+
+
  import API_URL from "../librairies/config";
 
        
@@ -42,31 +45,39 @@ import { MdNightlight } from "react-icons/md";
 
             const navigate = useNavigate();
 
+            const location = useLocation();
 
 
-  // 🔒 Empêche l'accès si déjà connecté
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      // Vérifie que le token est valide auprès du backend
-      fetch(`${API_URL}/accueil`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => {
-          if (res.ok) {
-            navigate("/Accueil"); // ✅ Redirige si le token est valide
-          }
-        })
-        .catch(() => {
-          // Token invalide ou erreur serveur : rien à faire, rester sur la page login
-          localStorage.removeItem("token"); // Nettoyage si nécessaire
-        });
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+            useEffect(() => {
+              const params = new URLSearchParams(location.search);
+              const token = params.get("token");
+          
+              if (token) {
+                localStorage.setItem("token", token);
+                navigate("/Accueil", { replace: true });
+              }
+            }, [location, navigate]);
+          
+            // ✅ 2. Vérifie s’il y a déjà un token (connexion automatique)
+            useEffect(() => {
+              const token = localStorage.getItem("token");
+              if (token) {
+                fetch(`${API_URL}/accueil`, {
+                  method: "GET",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                })
+                  .then((res) => {
+                    if (res.ok) {
+                      navigate("/Accueil");
+                    }
+                  })
+                  .catch(() => {
+                    localStorage.removeItem("token");
+                  });
+              }
+            }, []);
 
 
          
