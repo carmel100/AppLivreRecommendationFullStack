@@ -24,15 +24,15 @@ const routerResetPassword = require('./resetPassword');
 const connexion = require('./connexion');
 const ratingRoutes = require('./booksRaitings');
 const routerInterractionDetails = require('./routerInterraction');
-const helmet = require("helmet");
-const compression = require("compression");
+//const helmet = require("helmet");
+//const compression = require("compression");
 const MongoStore = require("connect-mongo");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(helmet());
-app.use(compression());
+//app.use(helmet());
+//app.use(compression());
 // Connexion DB
 connexion();
 
