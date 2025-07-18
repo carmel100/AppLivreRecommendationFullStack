@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
+import API_URL from "../librairies/config";
 const ResetPassword = () => {
   const { token } = useParams();
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const ResetPassword = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:3000/auth/reset-password/${token}`, {
+      const res = await fetch(`${API_URL}/auth/reset-password/${token}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 import PageWrapper from './PageWrapper';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BsFillPlusCircleFill } from "react-icons/bs";
-
+import API_URL from '../librairies/config';
 const Interraction = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [error, setError] = useState(null);
@@ -30,7 +30,7 @@ const Interraction = () => {
       return;
     }
 
-    fetch('http://localhost:3000/test/interractions', {
+    fetch(`${API_URL}/test/interractions`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -53,7 +53,7 @@ const Interraction = () => {
   }, [token]);
 
   const handleLike = async (id) => {
-    const res = await fetch(`http://localhost:3000/books/${id}/like`, {
+    const res = await fetch(`${API_URL}/books/${id}/like`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -67,7 +67,7 @@ const Interraction = () => {
   };
 
   const handleDislike = async (id) => {
-    const res = await fetch(`http://localhost:3000/books/${id}/dislike`, {
+    const res = await fetch(`${API_URL}/books/${id}/dislike`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -81,7 +81,7 @@ const Interraction = () => {
   };
 
   const handleAbonner = async (recommendationId) => {
-    const res = await fetch(`http://localhost:3000/test/interractions/${recommendationId}/abonner`, {
+    const res = await fetch(`${API_URL}/test/interractions/${recommendationId}/abonner`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

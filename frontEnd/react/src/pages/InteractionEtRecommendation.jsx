@@ -5,7 +5,7 @@ import store from "../librairies/zustand";
 import { Navigate ,useNavigate} from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 //import { useLocation } from "react-router-dom";
-
+import API_URL from "../librairies/config";
 const InteractionEtRecommendation = () => {
 
   const [form, setForm] = useState({
@@ -65,7 +65,7 @@ const InteractionEtRecommendation = () => {
       return;
     }
 
-    const response = await fetch('http://localhost:3000/books/recommendation', {
+    const response = await fetch(`${API_URL}/books/recommendation`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

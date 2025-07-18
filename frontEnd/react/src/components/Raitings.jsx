@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import API_URL from '../librairies/config';
 const RatingStars = ({ bookId, title, authors, description, publisher, publishedDate }) => {
   const [rating, setRating] = useState(0);
   const [submitted, setSubmitted] = useState(false);
@@ -7,7 +7,7 @@ const RatingStars = ({ bookId, title, authors, description, publisher, published
 
   // 🔄 Charger la note actuelle
   useEffect(() => {
-    fetch(`http://localhost:3000/api/books/${bookId}`)
+    fetch(`${API_URL}/api/books/${bookId}`)
       .then(res => res.json())
       .then(data => {
         if (data.averageRating) {
@@ -28,7 +28,7 @@ const RatingStars = ({ bookId, title, authors, description, publisher, published
       return;
     }
 
-    fetch(`http://localhost:3000/api/books/${bookId}/rate`, {
+    fetch(`${API_URL}/api/books/${bookId}/rate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

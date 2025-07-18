@@ -5,6 +5,7 @@ import CardItemRecommendation from "./CardItemRecommendation";
 import store from "../librairies/zustand";
 import { CgDanger } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../librairies/config";
 
 const CardRecommendation = () => {
 
@@ -36,7 +37,7 @@ const CardRecommendation = () => {
 
       if (!userId) return;
 
-      const res = await fetch(`http://localhost:3000/users/${userId}/recommendations`, {
+      const res = await fetch(`${API_URL}/users/${userId}/recommendations`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -52,7 +53,7 @@ const CardRecommendation = () => {
 
   const publierRecommandation = async (id) => {
     const token = localStorage.getItem("token")
-    const res = await fetch(`http://localhost:3000/books/publish/${id}`, {
+    const res = await fetch(`${API_URL}/books/publish/${id}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -68,8 +69,8 @@ const CardRecommendation = () => {
   if (!confirm) return;
 console.log("ID à supprimer :", id);
 
-  const res = await fetch(`http://localhost:3000/books/recommendation/${id}`, {
-    method: "DELETE",
+    const res = await fetch(`${API_URL}/books/recommendation/${id}`, {
+  method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
     },

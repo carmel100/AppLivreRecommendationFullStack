@@ -1,9 +1,9 @@
-
+import API_URL from "../librairies/config";
 // Exemple : LogoutButton.jsx
 const LogoutButton = () => {
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://localhost:3000/logout", {
+      const res = await fetch(`${API_URL}/logout`, {
         method: "GET",
         credentials: "include", // important si tu utilises les cookies
       });

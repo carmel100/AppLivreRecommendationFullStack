@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BiSolidLike, BiSolidDislike } from "react-icons/bi";
-import { jwtDecode } from "jwt-decode";
+//import { jwtDecode } from "jwt-decode";
 import Header from "./Header";
 import store from "../librairies/zustand";
+import API_URL from "../librairies/config";
 
 
 const BigViewRecommendation = () => {
@@ -14,7 +15,7 @@ const BigViewRecommendation = () => {
 
     const changetheme = store((state) => state.changetheme);
 
-
+/*
   let userId = null;
   if (token) {
     try {
@@ -23,12 +24,12 @@ const BigViewRecommendation = () => {
     } catch (err) {
       console.error("Erreur de décodage du token :", err);
     }
-  }
+  }*/
 
   useEffect(() => {
     const fetchRecommendation = async () => {
       try {
-         const res = await fetch(`http://localhost:3000/recommendation/bigview/${id}`, {
+        const res = await fetch(`${API_URL}/recommendation/bigview/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();

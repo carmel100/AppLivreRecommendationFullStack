@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Main from "./Main";
 import store from "../librairies/zustand";
 import PageWrapper from "./PageWrapper";
-
+import API_URL from "../librairies/config";
 const Screen = () => {
 
 
@@ -71,7 +71,7 @@ const Screen = () => {
 
     // Vérification backend que le token est toujours valide
     const tokenToUse = tokenFromUrl || localStorage.getItem("token");
-    fetch("http://localhost:3000/accueil", {
+    fetch(`${API_URL}/accueil`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${tokenToUse}`,

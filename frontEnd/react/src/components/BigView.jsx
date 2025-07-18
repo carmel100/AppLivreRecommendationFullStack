@@ -9,6 +9,7 @@ import { BiSolidLike, BiSolidDislike } from "react-icons/bi";
 import { jwtDecode } from "jwt-decode";
 import { FaPen } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+  import API_URL from "../librairies/config";
 
 const BigView = () => {
   const changetheme = store((state) => state.changetheme);
@@ -19,7 +20,6 @@ const BigView = () => {
   const [commentaire, setCommentaire] = useState("");
   const [commentaires, setCommentaires] = useState([]);
   const [nav, setNav] = useState(false);
- 
 
   const token = localStorage.getItem("token");
   let userId = null;
@@ -35,7 +35,7 @@ const BigView = () => {
 
   const fetchCommentaires = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/recommendation/${id}/commentaires`, {
+      const res = await fetch(`${API_URL}/recommendation/${id}/commentaires`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -52,7 +52,7 @@ const BigView = () => {
   const handleComment = async () => {
     if (!commentaire.trim()) return;
 
-    const res = await fetch(`http://localhost:3000/recommendation/${id}/comment`, {
+    const res = await fetch(`${API_URL}/recommendation/${id}/comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ const BigView = () => {
   };
 
   const handleDeleteComment = async () => {
-    const res = await fetch(`http://localhost:3000/recommendation/${id}/comment`, {
+    const res = await fetch(`${API_URL}/recommendation/${id}/comment`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +120,7 @@ useEffect(() => {
 
   const fetchData = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/recommendation/${id}`, {
+      const res = await fetch(`${API_URL}/recommendation/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -145,7 +145,7 @@ useEffect(() => {
 
 
 const handleLike = async (id) => {
-  const res = await fetch(`http://localhost:3000/test/interractions/${id}/like`, {
+  const res = await fetch(`${API_URL}/test/interractions/${id}/like`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}` }
   });
@@ -164,7 +164,7 @@ const handleLike = async (id) => {
 
 const handleDislike = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/test/interractions/${id}/dislike`, {
+    const res = await fetch(`${API_URL}/test/interractions/${id}/dislike`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -244,7 +244,7 @@ const handleDislike = async () => {
 
 
   const handleAbonner = async () => {
-    const res = await fetch(`http://localhost:3000/test/interractions/${id}/abonner`, {
+    const res = await fetch(`${API_URL}/test/interractions/${id}/abonner`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     });

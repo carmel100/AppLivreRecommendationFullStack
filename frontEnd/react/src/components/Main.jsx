@@ -11,7 +11,7 @@ import PageWrapper from "./PageWrapper";
 
 import { FiSearch } from "react-icons/fi";
 
-
+import API_URL from "../librairies/config";
 //import Dragbutton from "./Dragbutton";
 
 const Main = () => {
@@ -127,7 +127,7 @@ const Main = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/books/recommendation", {
+      const res = await fetch(`${API_URL}/books/recommendation`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
