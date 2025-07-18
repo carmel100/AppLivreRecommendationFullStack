@@ -8,7 +8,7 @@ export default defineConfig({
   
   server: {
     headers: {
-      "Content-Security-Policy": "default-src 'self'; connect-src 'self' https://ton-backend-domaine.com;"
+      "Content-Security-Policy": "default-src 'self'; connect-src 'self' https://applivrerecommendationfullstack.onrender.com;"
     }
   },
   
