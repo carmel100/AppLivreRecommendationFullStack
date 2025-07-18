@@ -77,7 +77,7 @@ import { MdNightlight } from "react-icons/md";
                     localStorage.removeItem("token");
                   });
               }
-            }, []);
+            }, [navigate]);
 
 
          
