@@ -10,7 +10,10 @@ routerGithub.get('/github',
 );
 
 routerGithub.get('/github/callback',
-  passport.authenticate('github', { failureRedirect: 'http://localhost:5173', session: false }),
+  passport.authenticate('github', {
+    failureRedirect: process.env.FRONTEND_URL || 'http://localhost:5173',
+    session: false
+  }),
   async (req, res) => {
     const user = await User.findById(req.user._id);
 
