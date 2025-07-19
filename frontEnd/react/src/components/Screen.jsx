@@ -1,16 +1,16 @@
 
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import {jwtDecode } from "jwt-decode";
+//import { useEffect } from "react";
+//import { useNavigate } from "react-router-dom";
+//import {jwtDecode } from "jwt-decode";
 import Header from "../components/Header";
 import Main from "./Main";
-import store from "../librairies/zustand";
+//import store from "../librairies/zustand";
 import PageWrapper from "./PageWrapper";
 import API_URL from "../librairies/config";
 const Screen = () => {
 
 
-
+/*
   const navigate = useNavigate();
   const setUser = store((state) => state.setUser);
 
@@ -99,7 +99,7 @@ const Screen = () => {
     console.log('Rechargement déclenché par refreshKey', refreshKey);
     // Ici tu peux relancer une animation, un fetch, etc.
   }, [refreshKey])
-  
+  */
   return (
     <>
 
