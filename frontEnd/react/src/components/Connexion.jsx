@@ -18,7 +18,7 @@ import { MdNightlight } from "react-icons/md";
 
  import { ToastContainer, toast } from 'react-toastify';
 
- import {  useLocation } from "react-router-dom";
+// import {  useLocation } from "react-router-dom";
 
 
  import API_URL from "../librairies/config";
@@ -45,10 +45,10 @@ import { MdNightlight } from "react-icons/md";
 
             const navigate = useNavigate();
 
-            const location = useLocation();
+       //     const location = useLocation();
 
 
-            useEffect(() => {
+       /*     useEffect(() => {
               const params = new URLSearchParams(location.search);
               const token = params.get("token");
           
@@ -56,7 +56,7 @@ import { MdNightlight } from "react-icons/md";
                 localStorage.setItem("token", token);
                 navigate("/Accueil", { replace: true });
               }
-            }, [location, navigate]);
+            }, [location, navigate]);*/
           
             // ✅ 2. Vérifie s’il y a déjà un token (connexion automatique)
             useEffect(() => {
