@@ -36,6 +36,7 @@ import { MdNightlight } from "react-icons/md";
 
          const [loading, setLoading] = useState(false);
 
+         const refreshKey = store((state) => state.refreshKey);
 
           const [email,setEmail] = useState('')
 
@@ -77,7 +78,7 @@ import { MdNightlight } from "react-icons/md";
                     localStorage.removeItem("token");
                   });
               }
-            }, [navigate]);
+            }, [navigate , refreshKey]);
 
 
          

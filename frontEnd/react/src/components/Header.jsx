@@ -111,13 +111,13 @@ import ProfileAvatar from "./ProfileAvatar";
    }
 
 
-   // const incrementRefreshKey =  store((state) => state.incrementRefreshKey);
+    const incrementRefreshKey =  store((state) => state.incrementRefreshKey);
 
 const location = useLocation();
 
 const handleReload = () => {
   if (location.pathname === '/Accueil') {
-    window.location.reload();
+    incrementRefreshKey(); // relance les useEffect dépendants
   }
 };
 
