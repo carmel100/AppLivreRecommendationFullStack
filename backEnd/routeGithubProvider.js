@@ -25,7 +25,7 @@ routerGithub.get('/github/callback',
     }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     const frontendURL = process.env.FRONTEND_URL || 'http://localhost:5173';
-    res.redirect(`${frontendURL}/Connexion?token=${token}`);
+    res.redirect(`${frontendURL}/Accueil?token=${token}`);
   }
 );
 
