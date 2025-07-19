@@ -1,4 +1,4 @@
-import { useState ,useEffect } from "react"
+import { useState ,/* useEffect*/ } from "react"
 
 import { Link } from 'react-router-dom';
 
@@ -58,7 +58,7 @@ import { MdNightlight } from "react-icons/md";
               }
             }, [location, navigate]);*/
           
-            // ✅ 2. Vérifie s’il y a déjà un token (connexion automatique)
+     /*       // ✅ 2. Vérifie s’il y a déjà un token (connexion automatique)
             useEffect(() => {
               const token = localStorage.getItem("token");
               if (token) {
@@ -77,7 +77,7 @@ import { MdNightlight } from "react-icons/md";
                     localStorage.removeItem("token");
                   });
               }
-            }, [navigate]);
+            }, [navigate]);*/
 
 
          
