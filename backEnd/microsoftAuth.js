@@ -1,9 +1,7 @@
 const passport = require('passport');
 const MicrosoftStrategy = require('passport-microsoft').Strategy;
-const jwt = require('jsonwebtoken');
 const User = require('./userProvider');
 require('dotenv').config();
-
 
 passport.use(new MicrosoftStrategy({
   clientID: process.env.MICROSOFT_CLIENT_ID,
@@ -22,13 +20,7 @@ passport.use(new MicrosoftStrategy({
       { new: true, upsert: true }
     );
 
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: '1d' }
-    );
-
-    return done(null, { user, token });
+    return done(null, user); // ✅ PAS de token ici
 
   } catch (err) {
     return done(err, null);
