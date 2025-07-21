@@ -1,16 +1,15 @@
-
-
 const passport = require('passport');
 const MicrosoftStrategy = require('passport-microsoft').Strategy;
-const dotenv = require('dotenv');
-const User = require('./userProvider'); // modèle Mongoose
-dotenv.config();
+const jwt = require('jsonwebtoken');
+const User = require('./userProvider');
+require('dotenv').config();
+
 
 passport.use(new MicrosoftStrategy({
   clientID: process.env.MICROSOFT_CLIENT_ID,
   clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
-  callbackURL: '/auth/microsoft/callback',
-  scope: ['user.read'],
+  callbackURL: process.env.MICROSOFT_CALLBACK_URL,
+  scope: ['user.read']
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     const user = await User.findOneAndUpdate(
@@ -22,24 +21,16 @@ passport.use(new MicrosoftStrategy({
       },
       { new: true, upsert: true }
     );
-    return done(null, user);
+
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    );
+
+    return done(null, { user, token });
+
   } catch (err) {
     return done(err, null);
   }
 }));
-
-// Sérialisation
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-
-// Désérialisation
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
-
