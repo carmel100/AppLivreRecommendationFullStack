@@ -63,7 +63,9 @@ import { MdNightlight } from "react-icons/md";
             useEffect(() => {
               const token = localStorage.getItem("token");
               if (token) {
-                fetch(`${API_URL}/accueil`, {
+               // fetch(`${API_URL}/accueil`, {
+
+                  fetch(`${API_URL}/protected`, { 
                   method: "GET",
                   headers: {
                     Authorization: `Bearer ${token}`,
