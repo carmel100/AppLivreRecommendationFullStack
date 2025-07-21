@@ -1,16 +1,16 @@
 
-//import { useEffect } from "react";
-//import { useNavigate } from "react-router-dom";
-//import {jwtDecode } from "jwt-decode";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {jwtDecode } from "jwt-decode";
 import Header from "../components/Header";
 import Main from "./Main";
-//import store from "../librairies/zustand";
-import PageWrapper from "./PageWrapper";
+import store from "../librairies/zustand";
+//import PageWrapper from "./PageWrapper";
 import API_URL from "../librairies/config";
 const Screen = () => {
 
 
-/*
+
   const navigate = useNavigate();
   const setUser = store((state) => state.setUser);
 
@@ -71,7 +71,7 @@ const Screen = () => {
 
     // Vérification backend que le token est toujours valide
     const tokenToUse = tokenFromUrl || localStorage.getItem("token");
-    fetch(`${API_URL}/accueil`, {
+    fetch(`${API_URL}/protected`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${tokenToUse}`,
@@ -99,7 +99,7 @@ const Screen = () => {
     console.log('Rechargement déclenché par refreshKey', refreshKey);
     // Ici tu peux relancer une animation, un fetch, etc.
   }, [refreshKey])
-  */
+
   return (
     <>
 
