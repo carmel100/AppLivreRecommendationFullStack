@@ -62,6 +62,9 @@ import { MdNightlight } from "react-icons/md";
            // ✅ 2. Vérifie s’il y a déjà un token (connexion automatique)
             useEffect(() => {
               const token = localStorage.getItem("token");
+
+              console.log("TOKEN LU AU REFRESH :", token); // 👈 log ici
+
               if (token) {
                // fetch(`${API_URL}/accueil`, {
 
