@@ -27,7 +27,11 @@ routerResetPassword.post("/forgot-password", async (req, res) => {
     }
   });
 
-  const resetLink = `http://localhost:5173/reset-password/${token}`;
+  const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+
+  const resetLink = `${FRONTEND_URL}/reset-password/${token}`;
+  ;
 
   await transporter.sendMail({
     from: `"Mon App" <${process.env.EMAIL_MAIL}>`,
