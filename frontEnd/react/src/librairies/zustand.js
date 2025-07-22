@@ -1,9 +1,7 @@
 import { create } from "zustand";
-
 import { persist } from 'zustand/middleware';
 
-
-  const store = create(
+const store = create(
   persist(
     (set) => ({
       // Mot-clé
@@ -25,11 +23,20 @@ import { persist } from 'zustand/middleware';
       refreshKey: 0,
       incrementRefreshKey: () =>
         set((state) => ({ refreshKey: state.refreshKey + 1 })),
+
+      // ✅ Loader global
+      loading1: false,
+      setLoading1: (isLoading) => set({ loading1: isLoading }),
     }),
     {
       name: 'app-storage', // clé dans localStorage
+      partialize: (state) => ({
+        word: state.word,
+        changetheme: state.changetheme,
+        user: state.user,
+      }), // on ne persiste pas `loading` ou `refreshKey`
     }
   )
 );
 
-   export default store
+export default store;

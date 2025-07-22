@@ -6,6 +6,7 @@ import store from "../librairies/zustand";
 import { CgDanger } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import API_URL from "../librairies/config";
+import SkeletonPost1 from "./SkeletonPost1";
 
 const CardRecommendation = () => {
 
@@ -14,11 +15,19 @@ const CardRecommendation = () => {
   const handleClick = () =>{
     navigate('/AddRecommendation')
   }
-
+   
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const setLoading1 = store((state) => state.setLoading1);
+  const loading1 = store((state) => state.loading1);
+
+
   useEffect(() => {
+
+    setLoading1(true);
+
+
     const fetchRecommendations = async () => {
       const token = localStorage.getItem('token');
       if (!token) return;
@@ -49,6 +58,12 @@ const CardRecommendation = () => {
     };
 
     fetchRecommendations();
+
+    setTimeout(() => {
+      setLoading1(false);
+    }, 3000);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const publierRecommandation = async (id) => {
@@ -110,11 +125,14 @@ console.log("ID à supprimer :", id);
       </button>
     </div>
   </div>
-)}
+) 
+}
       <div className={`flex min-h-screen ${changetheme ?  `bg-[#000000d1] text-white` : ``}  ${recommendations.length !== 0 ? `` : `hidden`}  flex-wrap px-12 pt-28 gap-x-16 gap-y-10 justify-center p-4`}>
 
-        {recommendations.map((rec) => (
-          <CardItemRecommendation
+        { 
+        
+        recommendations.map((rec) =>  loading1 ? ( <SkeletonPost1/> ) :  (
+         <CardItemRecommendation
             id={rec._id}
            key={rec._id} 
             Titre={rec.Titre.split(" ").slice(0, 5).join(" ") + '…'}
@@ -131,7 +149,7 @@ console.log("ID à supprimer :", id);
           />
 
                
-        ))} 
+        ))   } 
       </div>
     </>
   );

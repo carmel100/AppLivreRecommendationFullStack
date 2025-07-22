@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 import { useRef } from "react"
 import PageWrapper from "./PageWrapper";
 
+import SkeletonPost from "./SkeletonPost";
+
 import { FiSearch } from "react-icons/fi";
 
 import API_URL from "../librairies/config";
@@ -19,24 +21,14 @@ const Main = () => {
   const [livres, setLivres] = useState([]);
   const [livreSelectionneId, setLivreSelectionneId] = useState(null);
   const [livreDetails, setLivreDetails] = useState(null);
-//  const [show,setShow] = useState('')
 
-//  const [papover,setPapover] = useState('')
+  const setLoading1 = store((state) => state.setLoading1);
+  const loading1 = store((state) => state.loading1);
 
   const [papover1,setPapover1] = useState('')
 
       const constraintsRef = useRef(null)
 
-
-  /*const onMousePapover = () => {
-
-      setPapover(prev => !prev)
-  }
-
-   const onLeavePapover = () => {
-
-      setPapover(prev => !prev)
-  }*/
 
 
   const navigate = useNavigate()
@@ -59,14 +51,19 @@ const Main = () => {
 
 
   useEffect(() => {
+
+    setLoading1(true);
+
+
     if (!word) return;
 
-    function couperTitre(titre, maxMots = 5) {
+    function couperTitre(titre, maxMots = 4) {
       const mots = titre.split(" ");
       if (mots.length <= maxMots) return titre;
       return mots.slice(0, maxMots).join(" ") + "…";
     }
-
+     
+   
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(word)}`)
       .then((res) => res.json())
       .then((data) => {
@@ -82,17 +79,29 @@ const Main = () => {
             item.volumeInfo.imageLinks?.thumbnail ||
             "https://via.placeholder.com/300?text=No+Image"
           ).replace("http:", "https:"),
-          auteur: item.volumeInfo.authors?.join(", ") || "Auteur inconnu",
+          auteur: couperTitre( item.volumeInfo.authors?.join(", ") )|| "Auteur inconnu",
           genre: item.volumeInfo.categories?.join(", ") || "Genre inconnu",
         }));
 
         setLivres(livresAvecDetails);
+
+         // 👉 Affiche le loader pendant au moins 1.5 seconde
+         setTimeout(() => {
+          setLoading1(false);
+        }, 3000);
       })
       .catch((err) => {
         console.error("Erreur API Google Books :", err);
-      });
-  }, [word]);
+        
+        setLoading1(false)
 
+      
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   }); },[word] )
+
+
+
+  
   useEffect(() => {
     if (!livreSelectionneId) return;
 
@@ -153,26 +162,38 @@ const Main = () => {
      
 
       <div className={`flex flex-wrap         min-h-screen   ${changetheme ?  `bg-[#000000d1] text-white` : ``} px-12 pt-36 gap-x-16 gap-y-10 justify-center p-4`}>
-          
-        {livres.map((livre) => (
-         <PageWrapper  key={livre.id}>  <div  className={`w-[300px]    ${changetheme ? `bg-[#000000d1] text-white shadow-[0px_0px_1px_1px_#00ced15c]` : ` bg-[#f5f5f587]  shadow-[0px_0px_6px_0px_#00000038] `} rounded-[8px]  p-2`}>
-            <img
-              src={livre.image}
-              alt={livre.titre}
-              className="w-full h-[300px] object-fill rounded"
-            />
-            <p className="mt-2 font-semibold text-sm">{livre.titre}</p>
-            <p className="mt-2 font-semibold text-sm">Auteur : {livre.auteur}</p>
-            <p className="mt-2 font-semibold text-sm">Genre : {livre.genre}</p>
-            <div className="flex justify-end items-center mt-2">
-              <BsFillPlusCircleFill className="text-[30px]  text-[#00ced15c] cursor-pointer" 
-              onClick={() => setLivreSelectionneId(livre.id)}
-            />
-            </div>
-          
-          </div> </PageWrapper>
+      {livres.map((livre) =>
+  loading1 ? (
+    <SkeletonPost key={livre.id} />
+  ) : (
+    <PageWrapper key={livre.id}>
+      <div
+        className={`w-[300px]  block ${
+          changetheme
+            ? `bg-[#000000d1] text-white shadow-[0px_0px_1px_1px_#00ced15c]`
+            : `bg-[#f5f5f587] shadow-[0px_0px_6px_0px_#00000038]`
+        } rounded-[8px] p-2`}
+      >
+        <img
+          src={livre.image}
+          alt={livre.titre}
+          className="w-full h-[300px] object-fill rounded"
+        />
+        <p className="mt-2 font-semibold text-sm"> Titre : {livre.titre}</p>
+        <p className="mt-2 font-semibold text-sm">Auteur : {livre.auteur}</p>
+        <p className="mt-2 font-semibold text-sm">Genre : {livre.genre}</p>
+        <div className="flex justify-end items-center mt-2">
+          <BsFillPlusCircleFill
+            className="text-[30px] text-[#00ced15c] cursor-pointer"
+            onClick={() => setLivreSelectionneId(livre.id)}
+          />
+        </div>
+      </div>
+    </PageWrapper>
+  )
+)}
 
-        ))}   
+      
          <div className={`fixed w-[100%] h-[100vh]  top-[0] z-[21] backdrop-blur-[4px] bg-[#0000004d] ${livreSelectionneId ? `` :`hidden`}  `}></div>
            <div className="flex w-full justify-end">
          <RxCross1  className={`fixed z-[22]   top-[10px] text-[30px] ${livreSelectionneId ? `` :`hidden`} `}  onClick={handleClick}/>

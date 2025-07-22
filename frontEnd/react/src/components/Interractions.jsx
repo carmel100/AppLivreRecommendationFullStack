@@ -7,10 +7,16 @@ import PageWrapper from './PageWrapper';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import API_URL from '../librairies/config';
+import SkeletonPost1 from './SkeletonPost1';
+
+
 const Interraction = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [error, setError] = useState(null);
   const changetheme = store((state) => state.changetheme);
+  const setLoading1 = store((state) => state.setLoading1);
+  const loading1 = store((state) => state.loading1);
+
 
   const token = localStorage.getItem('token');
   let userId = null;
@@ -25,11 +31,16 @@ const Interraction = () => {
   }
 
   useEffect(() => {
+
+
     if (!token) {
       setError("Tu dois être connecté pour voir les recommandations.");
       return;
     }
 
+    setLoading1(true);
+
+      
     fetch(`${API_URL}/test/interractions`, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -45,11 +56,16 @@ const Interraction = () => {
 
         setRecommendations(data);
         setError(null);
+
+        setTimeout(() => {
+          setLoading1(false);
+        }, 3000);
       })
       .catch((err) => {
         setError("Erreur réseau");
         console.error(err);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const handleLike = async (id) => {
@@ -127,7 +143,7 @@ const handleClick = (id) => {
       <div className={`flex min-h-screen flex-wrap px-12 ${changetheme ? `bg-[#000000d1] text-white` : ``} pt-30 gap-x-16 gap-y-10 justify-center p-4`}>
                
  
-        {recommendations.map((rec) => (
+        {recommendations.map((rec) =>  loading1 ? ( <SkeletonPost1 key={rec._id} />  ) : (
         < PageWrapper   key={rec._id} >
           <div
           

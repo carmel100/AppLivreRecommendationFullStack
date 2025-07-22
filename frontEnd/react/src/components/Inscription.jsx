@@ -98,7 +98,7 @@ position: "top-center",
                    <MdLightMode  onClick={handleTheme} className={` ${changetheme ? `hidden` : ` ` }   text-yellow-400 bg-black  text-[38px] border-[1px] border-solid rounded-full p-[4px]`} />
                    </div>
 
-             <form className="grid  h-fit shadow-[0px_0px_3px_0px] rounded-[5px] py-2.5"  onSubmit={handleSubmit}>
+             <form className="grid  h-fit shadow-[0px_0px_3px_0px] rounded-[5px] py-[32px]"  onSubmit={handleSubmit}>
 
             <div className=" py-2  ps:grid sm:flex max-ps:grid  max-ps:w-[300px]  ps:w-[400px]  sm:w-[550px]   ps:justify-center max-ps:justify-center  sm:justify-between items-center px-4">
                 <label htmlFor="nom"  className="  max-ps:pb-1 ps:pb-1" >Nom</label>
