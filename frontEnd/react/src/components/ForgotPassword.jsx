@@ -2,10 +2,13 @@
   import { useState } from "react";
    import API_URL from "../librairies/config";
    import store from "../librairies/zustand";
+
+   import { ToastContainer, toast } from 'react-toastify';
+
   const ForgotPassword = () => {
 
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  //const [message, setMessage] = useState("");
 
   const changetheme = store((state) => state.changetheme);
 
@@ -22,9 +25,18 @@
     const data = await res.json();
 
     if (res.ok) {
-      setMessage("Un email de réinitialisation a été envoyé.");
+      console.log("Un email de réinitialisation a été envoyé.");
+
+      toast.success('Un email de réinitialisation a été envoyé.',{
+        position: "top-center",
+          theme: "light"
+               })
     } else {
-      setMessage(data.message || "Erreur.");
+      console.log(data.message || "Erreur.");
+      toast.error(data.message || "Erreur.",{
+        position: "top-center",
+          theme: "light"
+               })
     }
   };
 
@@ -44,7 +56,20 @@
         required
       />
       <button className="bg-blue-500 text-white px-4 py-2">Envoyer</button>
-      {message && <p className="mt-2 text-sm text-gray-700">{message}</p>}
+      {/*message && <p className="mt-2 text-sm text-gray-700">{message}</p>*/}
+      <ToastContainer 
+            hideProgressBar={true}             
+  closeOnClick={true}                 
+  pauseOnFocusLoss={true}            
+  draggable={true}                   
+  autoClose={false}                  
+  newestOnTop={true}                 
+  pauseOnHover={true}               
+  rtl={false}                        
+  position="top-center"              
+  theme="light"        
+            
+            />   
     </form>
         </div>
          
