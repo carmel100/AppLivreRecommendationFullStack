@@ -225,7 +225,7 @@ const handleReload2 = () => {
 
     <IoClose  onClick={handleMenu} className={`text-[40px] text-[#000000d4]    ${changetheme ? ` text-white` :`text-[#000000d4]`}    ${menu ? `max-rs:block` : `max-rs:hidden`  } hidden `} /> 
 
-        <li className={`flex  duration-300 items-center gap-x-[6px]      shadow-[0px_0px_3px_0px_grey] rounded-full py-[2px] px-[12px]`} onClick={handleUser}>
+        <li className={`flex  duration-300 items-center gap-x-[6px]   ${changetheme ? `shadow-[0px_0px_2px_2px_grey]` :`shadow-[0px_0px_3px_0px_grey]`}    rounded-full py-[2px] px-[12px]`} onClick={handleUser}>
               {user && user.prenom }
 
               {user1 && user1.prenom }
