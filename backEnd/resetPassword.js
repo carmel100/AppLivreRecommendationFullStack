@@ -34,7 +34,7 @@ routerResetPassword.post("/forgot-password", async (req, res) => {
   ;
 
   await transporter.sendMail({
-    from: `"Mon App" <${process.env.EMAIL_MAIL}>`,
+    from: `"Books ?" <${process.env.EMAIL_MAIL}>`,
     to: user.email,
     subject: "Réinitialisation de mot de passe",
     html: `<p>Cliquez sur ce lien pour réinitialiser votre mot de passe :</p><a href="${resetLink}">${resetLink}</a>`
