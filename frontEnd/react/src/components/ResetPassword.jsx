@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API_URL from "../librairies/config";
+import store from "../librairies/zustand";
 const ResetPassword = () => {
   const { token } = useParams();
   const navigate = useNavigate();
 
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  const changetheme = store((state) => state.changetheme);
+
 
   const handleReset = async (e) => {
     e.preventDefault();
@@ -36,7 +40,9 @@ const ResetPassword = () => {
   };
 
   return (
-    <form onSubmit={handleReset} className="p-4 max-w-md mx-auto mt-20">
+    <>
+       <div  className={` ${changetheme ? `bg-[#000000d1] text-white` : ``} h-[100vh]`}>
+         <form onSubmit={handleReset} className="p-4 max-w-md mx-auto mt-20">
       <h2 className="text-xl mb-4 font-bold">Nouveau mot de passe</h2>
       <input
         type="password"
@@ -51,6 +57,10 @@ const ResetPassword = () => {
       </button>
       {message && <p className="mt-4 text-sm text-center">{message}</p>}
     </form>
+       </div>
+     
+    </>
+  
   );
 };
 
