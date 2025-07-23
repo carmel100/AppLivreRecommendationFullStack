@@ -214,7 +214,7 @@ const handleReload2 = () => {
          <IoMoonSharp className={` transition-all duration-500 ${changetheme ? 'opacity-100' : `opacity-0 pointer-events-none` }  rounded-full h-[32px] w-[32px] p-[6px] text-[yellow] bg-[#000000ba]  max-ds:left-[39px] top-[-31px]   ds:left-[78px] relative    `} onClick={clickChange}  />
         </li>
         </div>
-        <div className="flex justify-between items-center rs:max-w-40 max-rs:w-[223px] max-fs:w-[180px] fs:w-[200px]  ds:max-w-fit ds:w-auto  ">
+        <div className="flex justify-between items-center rs:max-w-40 max-rs:w-[223px] max-fs:w-[180px]   ds:max-w-fit ds:w-auto  ">
 
         <li className={`flex size-fit    max-rs:block  rs:hidden  max-ds:w-[30px] ds:w-[111px] h-[34px] duration-1000  rounded-full justify-between   `} >
          <IoSunny className={`  transition-all duration-500     ${changetheme ?'opacity-0 pointer-events-none' : 'opacity-100'} rounded-full h-[32px]  w-[32px] p-[6px] text-[yellow] bg-[#000000ad] top-[1px]   left-[0px] `}   onClick={clickChange}/>
