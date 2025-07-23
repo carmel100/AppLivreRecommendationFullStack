@@ -42,7 +42,7 @@ const ResetPassword = () => {
   return (
     <>
        <div  className={` ${changetheme ? `bg-[#000000d1] text-white` : ``} h-[100vh]`}>
-         <form onSubmit={handleReset} className="p-4 max-w-md mx-auto mt-20">
+         <form onSubmit={handleReset} className="p-4 max-w-md mx-auto ">
       <h2 className="text-xl mb-4 font-bold">Nouveau mot de passe</h2>
       <input
         type="password"
