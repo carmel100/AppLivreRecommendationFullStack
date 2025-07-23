@@ -70,6 +70,19 @@ const ResetPassword = () => {
         Réinitialiser
       </button>
       {/*message && <p className="mt-4 text-sm text-center">{message}</p>*/}
+      <ToastContainer 
+            hideProgressBar={true}             
+  closeOnClick={true}                 
+  pauseOnFocusLoss={true}            
+  draggable={true}                   
+  autoClose={false}                  
+  newestOnTop={true}                 
+  pauseOnHover={true}               
+  rtl={false}                        
+  position="top-center"              
+  theme="light"        
+            
+            />   
     </form>
        </div>
      
