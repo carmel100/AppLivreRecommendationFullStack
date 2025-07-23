@@ -120,13 +120,23 @@ import { MdNightlight } from "react-icons/md";
       if (data.token && data.user) {
   localStorage.setItem("token", data.token);
   localStorage.setItem("user", JSON.stringify(data.user)); // 👈 ICI !
-   toast.success("Connexion réussi",{ position: "top-center",autoClose:3000 ,theme: "light", 
 
-    style :{ backgroundColor:"rgba(255, 255, 255, 0.3)" },
-    backdropFilter: "blur(10px)",
-    color:"white"
-   }
-    )
+  toast.success("Connexion réussie", {
+  position: "top-center",
+  autoClose: 3000,
+  theme: "light",
+  style: changetheme
+    ? {
+        backgroundColor: "#111",      // fond sombre
+        backdropFilter: "blur(10px)",
+        color: "#fff",                // texte blanc
+      }
+    : {
+        backgroundColor: "rgba(255, 255, 255, 0.3)", // fond clair
+        backdropFilter: "blur(10px)",
+        color: "black"
+      }
+});
 
 
 setTimeout(() => {
@@ -135,12 +145,21 @@ setTimeout(() => {
 
 } else {
   setLoading(false);
-  toast.error("Échec de l'authentification", {position: "top-center",
-  theme: "light",autoClose:3000    ,  
- style :{ backgroundColor:"rgba(255, 255, 255, 0.3)" },
-    backdropFilter: "blur(10px)",
-    color:"white" 
-
+  toast.error("Connexion échouée", {
+    position: "top-center",
+    autoClose: 3000,
+    theme: "light",
+    style: changetheme
+      ? {
+          backgroundColor: "#111",      // fond sombre
+          backdropFilter: "blur(10px)",
+          color: "#fff",                // texte blanc
+        }
+      : {
+          backgroundColor: "rgba(255, 255, 255, 0.3)", // fond clair
+          backdropFilter: "blur(10px)",
+          color: "black"
+        }
   });
 }
 

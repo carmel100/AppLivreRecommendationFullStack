@@ -44,10 +44,16 @@ function handleSubmit(e) {
     .then((data) => {
        console.log(data)
 
-       toast.success('Inscription réussi',{
-position: "top-center",
-  theme: "light"
-       })
+       toast.success(" Inscription réussi ", {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "light",
+        style: {
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          backdropFilter: "blur(10px)",
+          color: "white"
+        }
+      })
 
        setTimeout(() => {
     window.location.href = "/";
@@ -59,9 +65,15 @@ position: "top-center",
     .catch((error) => {
       console.log('inscription échouée', error);
 
-      toast.error('inscription échouée',{
+      toast.error("inscription échouée", {
         position: "top-center",
-  theme: "light"
+        autoClose: 3000,
+        theme: "light",
+        style: {
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          backdropFilter: "blur(10px)",
+          color: "white"
+        }
       })
     });
 }
