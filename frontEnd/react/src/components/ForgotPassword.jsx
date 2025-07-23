@@ -10,6 +10,9 @@
   const [email, setEmail] = useState("");
   //const [message, setMessage] = useState("");
 
+  const notify = toast()
+
+
   const changetheme = store((state) => state.changetheme);
 
 
@@ -55,7 +58,7 @@
         className="border p-2 w-full mb-4"
         required
       />
-      <button className="bg-blue-500 text-white px-4 py-2">Envoyer</button>
+      <button className="bg-blue-500 text-white px-4 py-2" onClick={notify}>Envoyer</button>
       {/*message && <p className="mt-2 text-sm text-gray-700">{message}</p>*/}
       <ToastContainer 
             hideProgressBar={true}             

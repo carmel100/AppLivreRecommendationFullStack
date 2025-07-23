@@ -14,6 +14,7 @@ const ResetPassword = () => {
 
   const changetheme = store((state) => state.changetheme);
 
+  const notify = toast()
 
   const handleReset = async (e) => {
     e.preventDefault();
@@ -66,7 +67,7 @@ const ResetPassword = () => {
         className="border border-gray-300 p-2 w-full mb-4 rounded"
         required
       />
-      <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+      <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"  onClick={notify}>
         Réinitialiser
       </button>
       {/*message && <p className="mt-4 text-sm text-center">{message}</p>*/}
