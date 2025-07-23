@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API_URL from "../librairies/config";
 import store from "../librairies/zustand";
+import { ToastContainer, toast } from 'react-toastify';
+
+
 const ResetPassword = () => {
   const { token } = useParams();
   const navigate = useNavigate();
 
   const [newPassword, setNewPassword] = useState("");
-  const [message, setMessage] = useState("");
+ // const [message, setMessage] = useState("");
 
   const changetheme = store((state) => state.changetheme);
 
@@ -27,15 +30,26 @@ const ResetPassword = () => {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("✅ Mot de passe mis à jour !");
+        toast.success('Mot de passe mis à jour !',{
+          position: "top-center",
+            theme: "light"
+                 })
         setTimeout(() => {
           navigate("/"); // redirige vers la page de connexion après 3 secondes
         }, 3000);
       } else {
-        setMessage(data.message || "❌ Une erreur est survenue.");
+
+        toast.warning(data.message || "❌ Une erreur est survenue.",{
+          position: "top-center",
+            theme: "light"
+                 })
       }
     } catch (error) {
-      setMessage("❌ Erreur serveur. Veuillez réessayer.",error);
+       
+      toast.error("❌ Erreur serveur. Veuillez réessayer.",error,{
+        position: "top-center",
+          theme: "light"
+               })
     }
   };
 
@@ -55,7 +69,7 @@ const ResetPassword = () => {
       <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
         Réinitialiser
       </button>
-      {message && <p className="mt-4 text-sm text-center">{message}</p>}
+      {/*message && <p className="mt-4 text-sm text-center">{message}</p>*/}
     </form>
        </div>
      

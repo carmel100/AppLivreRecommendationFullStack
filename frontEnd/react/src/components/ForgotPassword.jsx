@@ -45,7 +45,7 @@
 
         <>
        <div  className={` ${changetheme ? `bg-[#000000d1] text-white` : ``} h-[100vh]`}>
-       <form onSubmit={handleSubmit} className="p-4 max-w-md mx-auto">
+       <form onSubmit={handleSubmit} className="pt-4 max-w-md mx-auto">
       <h2 className="text-xl mb-4">Mot de passe oublié</h2>
       <input
         type="email"
