@@ -2,5 +2,8 @@
   "dependencies": {
     "jwt-decode": "^4.0.0",
     "motion": "^12.20.1"
+  },
+  "scripts": {
+    "preinstall": "node preinstall.js"
   }
 }

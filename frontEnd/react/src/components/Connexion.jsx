@@ -139,9 +139,9 @@ import { MdNightlight } from "react-icons/md";
 });
 
 
-setTimeout(() => {
+ //  setTimeout(() => {
   navigate("/Accueil");
-}, 1000)
+///}, 1000)
 
 } else {
   setLoading(false);
